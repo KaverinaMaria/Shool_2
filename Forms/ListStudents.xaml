@@ -1,0 +1,47 @@
+﻿<Window x:Class="School.Forms.ListStudents"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:School.Forms"
+        mc:Ignorable="d"
+        Title="EducationHub" Height="600" Width="1000" MinHeight="600" MinWidth="1000" WindowStartupLocation="CenterScreen" Icon="/logo.png" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="600*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="AliceBlue">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center"  Margin="10 30">
+                <Image Height="35" Source="/logo.png"/>
+                <TextBlock Text="EducationHub" Foreground="#0288d1" FontFamily="Century Gothic" FontSize="24" FontWeight="Bold" Margin="5 0"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Width="200">
+                <Label>ФИО:</Label>
+                <TextBox x:Name="tbName"></TextBox>
+                <Label>Дата рождения:</Label>
+                <DatePicker x:Name="dpBithday"/>
+                <Label>Электронная почта:</Label>
+                <TextBox x:Name="tbEmail"></TextBox>
+                <Label>Логин:</Label>
+                <TextBox x:Name="tbLogin"></TextBox>
+                <Label>Пароль:</Label>
+                <TextBox x:Name="tbPassword" Margin="0 0 0 10"></TextBox>
+                <Button Content="Добавить" Click="Add_Click"/>
+                <Button Content="Удалить" Click="Delete_Click"/>
+                <Button Content="Очистить" Click="Change_Click"/>
+                <Button Content="Главная" Click="Home_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid Grid.Column="1" x:Name="dgList" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Id" Binding="{Binding IDStudent}"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding NameStudent}"/>
+                <DataGridTextColumn Header="День рождение" Binding="{Binding BithdayStudent}"/>
+                <DataGridTextColumn Header="Электорнная почта" Binding="{Binding EmailStudent}"/>
+                <DataGridTextColumn Header="Класс" Binding="{Binding IDGroup}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

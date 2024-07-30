@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище SchoolProjectWPFModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AcademicPerformance">
+    <Key>
+      <PropertyRef Name="IDAP" />
+    </Key>
+    <Property Name="IDAP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDStudent" Type="int" />
+    <Property Name="IDSubject" Type="int" />
+    <Property Name="Evaluation" Type="int" />
+    <Property Name="DateEvaluation" Type="int" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="IDGroup" />
+    </Key>
+    <Property Name="IDGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="Older" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDClassroomTeacher" Type="int" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="IDSchedule" />
+    </Key>
+    <Property Name="IDSchedule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDTeacher" Type="int" />
+    <Property Name="IDSubject" Type="int" />
+    <Property Name="IDWeekend" Type="int" />
+    <Property Name="NumberSubject" Type="int" />
+  </EntityType>
+  <EntityType Name="SchoolSubject">
+    <Key>
+      <PropertyRef Name="IDSubject" />
+    </Key>
+    <Property Name="IDSubject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameSubject" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumberHours" Type="int" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="IDStudent" />
+    </Key>
+    <Property Name="IDStudent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameStudent" Type="nvarchar" MaxLength="50" />
+    <Property Name="LoginStudent" Type="nvarchar" MaxLength="50" />
+    <Property Name="PasswordStudent" Type="nvarchar" MaxLength="50" />
+    <Property Name="BithdayStudent" Type="date" />
+    <Property Name="EmailStudent" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDGroup" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="IDTeacher" />
+    </Key>
+    <Property Name="IDTeacher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameTeacher" Type="nvarchar" MaxLength="50" />
+    <Property Name="LoginTeacher" Type="nvarchar" MaxLength="50" />
+    <Property Name="PasswordTeacher" Type="nvarchar" MaxLength="50" />
+    <Property Name="BithdayTeacher" Type="date" />
+    <Property Name="IDSubject" Type="int" />
+    <Property Name="EmailTeacher" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Weekend">
+    <Key>
+      <PropertyRef Name="IDWeekend" />
+    </Key>
+    <Property Name="IDWeekend" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameWeekend" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_AcademicPerformance_SchoolSubject">
+    <End Role="SchoolSubject" Type="Self.SchoolSubject" Multiplicity="0..1" />
+    <End Role="AcademicPerformance" Type="Self.AcademicPerformance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolSubject">
+        <PropertyRef Name="IDSubject" />
+      </Principal>
+      <Dependent Role="AcademicPerformance">
+        <PropertyRef Name="IDSubject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcademicPerformance_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+    <End Role="AcademicPerformance" Type="Self.AcademicPerformance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="IDStudent" />
+      </Principal>
+      <Dependent Role="AcademicPerformance">
+        <PropertyRef Name="IDStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_Teachers">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="IDTeacher" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="IDClassroomTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Schedule_SchoolSubject">
+    <End Role="SchoolSubject" Type="Self.SchoolSubject" Multiplicity="0..1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolSubject">
+        <PropertyRef Name="IDSubject" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="IDSubject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Schedule_Teachers">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="IDTeacher" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="IDTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Schedule_Weekend">
+    <End Role="Weekend" Type="Self.Weekend" Multiplicity="0..1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Weekend">
+        <PropertyRef Name="IDWeekend" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="IDWeekend" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="IDGroup" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="IDGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teachers_SchoolSubject">
+    <End Role="SchoolSubject" Type="Self.SchoolSubject" Multiplicity="0..1" />
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolSubject">
+        <PropertyRef Name="IDSubject" />
+      </Principal>
+      <Dependent Role="Teachers">
+        <PropertyRef Name="IDSubject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище SchoolProjectWPFModelContainer">
+    <EntitySet Name="AcademicPerformance" EntityType="Self.AcademicPerformance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SchoolSubject" EntityType="Self.SchoolSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Weekend" EntityType="Self.Weekend" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AcademicPerformance_SchoolSubject" Association="Self.FK_AcademicPerformance_SchoolSubject">
+      <End Role="SchoolSubject" EntitySet="SchoolSubject" />
+      <End Role="AcademicPerformance" EntitySet="AcademicPerformance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcademicPerformance_Students" Association="Self.FK_AcademicPerformance_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="AcademicPerformance" EntitySet="AcademicPerformance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_Teachers" Association="Self.FK_Group_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Schedule_SchoolSubject" Association="Self.FK_Schedule_SchoolSubject">
+      <End Role="SchoolSubject" EntitySet="SchoolSubject" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Schedule_Teachers" Association="Self.FK_Schedule_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Schedule_Weekend" Association="Self.FK_Schedule_Weekend">
+      <End Role="Weekend" EntitySet="Weekend" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Group" Association="Self.FK_Students_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teachers_SchoolSubject" Association="Self.FK_Teachers_SchoolSubject">
+      <End Role="SchoolSubject" EntitySet="SchoolSubject" />
+      <End Role="Teachers" EntitySet="Teachers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,38 @@
+﻿<Window x:Class="School.Forms.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:School.Forms"
+        mc:Ignorable="d"
+                Title="EducationHub" Height="600" Width="1000" MinHeight="600" MinWidth="1000" WindowStartupLocation="CenterScreen" Icon="/logo.png" >
+    <Grid Background="SteelBlue">
+        <Border CornerRadius="90" Background="White" Margin="25">
+            <StackPanel Margin="35" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Регистрация" Foreground="#0288d1" FontFamily="Century Gothic" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="5 0"/>
+                <StackPanel Width="500" >
+                    <Label>Выберите статус:</Label>
+                    <ComboBox x:Name="cbRole" FontFamily="Century Gothic" FontSize="14" Background="White" >
+                        <Label Content="Преподаватель"/>
+                        <Label Content="Обучающийся"/>
+                    </ComboBox>
+                    <Label>ФИО:</Label>
+                    <TextBox x:Name="tbName"></TextBox>
+                    <Label>Дата рождения:</Label>
+                    <DatePicker Name="dpBithday"/>
+                    <Label>Электронная почта:</Label>
+                    <TextBox x:Name="tbEmail"></TextBox>
+                    <Label>Логин:</Label>
+                    <TextBox x:Name="tbLogin"></TextBox>
+                    <Label>Пароль:</Label>
+                    <TextBox x:Name="tbPassword"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="BackUp" Margin="15" Content="Вернуться на главную" Click="BackUp_Click"/>
+                    <Button x:Name="Reg" Margin="15" Content="Зарегистрироватся" Click="Reg_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
